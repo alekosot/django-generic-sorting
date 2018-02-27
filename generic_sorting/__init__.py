@@ -7,4 +7,4 @@ __email__ = 'a.sotiriou@difio.gr'
 __version__ = '0.1'
 
 
-default_app_config = 'dynsort.apps.GenericSortingAppConfig'
+default_app_config = 'generic_sorting.apps.GenericSortingAppConfig'
