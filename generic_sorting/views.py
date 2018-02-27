@@ -38,7 +38,7 @@ def generic_sorting(request, content_type_pk, order_by_field, primary_keys):
         if formset.is_valid():
             formset.save()
             url = getattr(
-                settings, 'DYNAMIC_SORTING_SUCCESS_URL', request.path
+                settings, 'GENERIC_SORTING_SUCCESS_URL', request.path
             )
             return HttpResponseRedirect(force_text(url))
     else:
