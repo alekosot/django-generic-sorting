@@ -1,0 +1,33 @@
+.generic-sorting-form:not(:active) {
+  padding: 8px 12px;
+  border-top: 1px solid #f2f2f2;
+  cursor: move;
+  cursor: grab;
+}
+.generic-sorting-form:nth-child(even) {
+  background-color: rgba(0,0,0,0.01);
+}
+.generic-sorting-form:active {
+  cursor: move;
+  cursor: grabbing;
+}
+.gu-mirror {
+  cursor: move;
+  cursor: grabbing !important;
+}
+.generic-sorting-form:last-child {
+  border-bottom: 1px solid #f2f2f2;
+}
+.generic-sorting-name {
+  display: inline-block;
+  padding-left: 15px;
+}
+.generic-sorting-shade-hex {
+  display:inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: relative;
+  top: 5px;
+  left: 7px;
+}

@@ -1,0 +1,65 @@
+{% load static generic_sorting i18n %}
+
+{% generic_sorting_partial_template model as partial_template %}
+
+{% block generic_sorting_styles %}
+  <link rel="stylesheet" href="{% static 'generic-sorting/css/generic-sorting.css' %}"2>
+{% endblock generic_sorting_styles %}
+
+
+<form action="" method="post">
+  {% csrf_token %}
+  {% block generic_sorting_partial %}
+    {% include partial_template %}
+  {% endblock generic_sorting_partial %}
+  <button type="submit" name="button">{% trans "Submit" %}</button>
+</form>
+
+
+{% block generic_sorting_scripts %}
+  {# <script src="{% static 'generic-sorting/js/generic-sorting.js' %}" charset="utf-8"></script>#}
+  <script type="text/javascript">
+    (function() {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var forms = document.querySelectorAll('.generic-sorting-form');
+      var dragZone = forms[0].parentNode;
+      var form = null;
+      var orderApplied = false; // check before submit
+
+      // Find the form
+      if (dragZone.tagName == 'form') {
+        form = dragZone;
+      } else {
+        if (typeof dragZone.closest !== 'undefined') {
+          form = dragZone.closest('form');
+        } else {
+          form = dragZone.parentNode;
+          while (form.tagName !== 'form') {
+            form = form.parentNode;
+          }
+        }
+      }
+
+      dragula([dragZone]);
+
+      form.addEventListener('submit', function(e) {
+        if (!orderApplied) {
+          e.preventDefault();
+
+          [].forEach.call(document.querySelectorAll('.generic-sorting-form'), function(form, index) {
+            form.querySelector('input[id^="id_form-"][id$="-{{ order_by_field }}"]').value = index;
+          });
+
+          orderApplied = true;
+
+          form.submit();
+        }
+      })
+    });
+
+    }());
+
+  </script>
+{% endblock generic_sorting_scripts %}

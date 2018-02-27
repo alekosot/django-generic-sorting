@@ -1,0 +1,52 @@
+{% block generic_sorting_management_form %}
+  {{ formset.management_form }}
+{% endblock generic_sorting_management_form %}
+
+{% block generic_sorting_non_form_errors %}
+  {% if formset.non_form_errors %}
+    <ul>
+      {% for error in formset.non_form_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock generic_sorting_non_form_errors %}
+
+{% for form in formset %}
+  {% if form.non_field_errors %}
+    <ul>
+      {% for field in form.non_field_errors %}
+        <li>{{ field }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% block generic_sorting_form %}
+    <div class="generic-sorting-form">
+      {% block drag_handler %}
+        <i class="fa fa-sort"></i>
+      {% endblock drag_handler %}
+
+      {% for field in form %}
+        {% block generic_sorting_field %}
+          {% if not field.is_hidden %}
+            <div class="generic-sorting-form-field">
+              {{ field }}
+              {% if field.errors %}
+                <ul class="errors-list generic-sorting-errors-list">
+                  {% for error in field.errors %}
+                    <li class="error generic-sorting-error">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% else %}
+            {{ field }}
+          {% endif %}
+        {% endblock generic_sorting_field %}
+      {% endfor %}
+      {% block generic_sorting_instance_repr %}
+        <span class="generic-sorting-name">{{ form.instance }}</span>
+      {% endblock generic_sorting_instance_repr %}
+    </div>
+  {% endblock generic_sorting_form %}
+{% endfor %}
