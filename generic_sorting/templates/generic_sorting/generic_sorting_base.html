@@ -12,7 +12,11 @@
   {% block generic_sorting_partial %}
     {% include partial_template %}
   {% endblock generic_sorting_partial %}
-  <button type="submit" name="button">{% trans "Submit" %}</button>
+  {% block generic_sorting_submit %}
+    {% if not submitless  %}
+      <button type="submit" name="button">{% trans "Submit" %}</button>
+    {% endif %}
+  {% endblock generic_sorting_submit %}
 </form>
 
 
