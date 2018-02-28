@@ -26,7 +26,6 @@ def security_check(request, content_type, order_by_field, objects,
 
 
 def generic_sorting_url(queryset, order_by_field=None):
-    print(queryset)
     ctype = ContentType.objects.get_for_model(queryset.model)
     primary_keys_qs = queryset.values_list('pk', flat=True)
     primary_keys = ','.join([str(pk) for pk in primary_keys_qs])
